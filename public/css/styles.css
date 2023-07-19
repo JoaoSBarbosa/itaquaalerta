@@ -1,0 +1,170 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.content-index {
+  height: 100vh;
+  width: 100%;
+}
+
+.container-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  height: 100%;
+}
+
+.banner {
+  background-color: #1da1f2;
+  height: 100%;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-info {
+  padding: 5rem 1rem;
+}
+
+.communicationItem {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 24px;
+  margin: 48px auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.formulario {
+  width: 70%;
+  margin: 1rem auto;
+  padding: 10px;
+}
+#entrar {
+  margin-bottom: 2rem;
+}
+.formulario-inputs {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  align-items: center;
+  gap: 0 20px;
+}
+.text-ganger {
+  color: rgb(255, 5, 5);
+}
+.formulario input,
+.formulario button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+#senha-perdida {
+  margin-top: 5px;
+}
+
+#senha-perdida a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#senha-perdida a:hover {
+  text-decoration: underline;
+}
+.btn-inscreva-se:hover {
+  background-color: #0056b3;
+}
+h1 {
+  display: block;
+  font-size: 2em;
+  width: 60%;
+  margin: 2rem 0;
+}
+.title {
+  color: #1da1f2;
+  font-size: 27px;
+  line-height: 32px;
+}
+.subtitle {
+  color: #14171a;
+  font-size: 18px;
+  line-height: 24px;
+  /* margin: 16px auto; */
+  margin-bottom: 2rem;
+}
+.formulario button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.btn-inscreva-se {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+@media (max-width: 940px) {
+  .container-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .formulario {
+    width: 90%;
+    padding: 5px;
+  }
+
+  .communicationItem {
+    font-size: 1rem;
+    line-height: 20px;
+    margin: 20px auto;
+  }
+  h1 {
+    width: 100%;
+  }
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
+  .formulario-inputs {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .banner-info {
+    padding: 2rem 1rem;
+  }
+
+  .communicationItem {
+    font-size: 14px;
+    line-height: 22px;
+    margin: 28px auto;
+  }
+
+  .title,
+  .subtitle {
+    font-size: 1.2rem;
+  }
+}
