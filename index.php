@@ -71,7 +71,7 @@ session_start();
 
         <div class="descricao">
           <div>
-            <img src="./public/img/logo-index.png" height="80" />
+            <img src="./public/img/painel.png" height="250" />
             <h1 class="title">Sua denúncia é o primeiro passo para transformar buracos em asfalto e iluminar o caminho para um futuro melhor</h1>
             <h2 class="mt-5 subtitle">Junte-se a nós na luta por ruas seguras e bem cuidadas.</h2>
             <a href="./pages/registro.php" class="btn-inscreva-se" style="max-width: max-content;">Inscrever-se</a>

@@ -1,36 +1,13 @@
 <?php
-session_start();
-if (!isset($_SESSION["autenticado"]) || $_SESSION["autenticado"] != 'SIM') {
-  header('Location: ../index.php?login=erro2');
-}
-?>
-
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8" />
-  <title>Itaquá Alerta</title>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-  <style>
-    .card-abrir-chamado {
-      padding: 30px 0 0 0;
-      width: 100%;
-      margin: 0 auto;
-    }
-  </style>
-</head>
+require_once '../validator/validador_acesso.php';
+require_once '../modules/header.php'
+  ?>
 
 <body>
 
-  <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">
-      <img src="../public/img/logo-index.png" width="30" height="30" class="d-inline-block align-top" alt="">
-      Itaquá Alerta
-    </a>
-  </nav>
+  <?php
+  require_once '../modules/menu.php'
+    ?>
 
   <div class="container">
     <div class="row">

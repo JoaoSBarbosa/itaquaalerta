@@ -1,63 +1,22 @@
 <?php
-session_start();
-
-if (!isset($_SESSION["autenticado"]) || $_SESSION["autenticado"] != 'SIM') {
-  header('Location: ../index.php?login=erro2');
-}
-
-
+require_once '../validator/validador_acesso.php';
 ?>
 
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Itaqua Alerta - Home</title>
+<?php
+require_once '../modules/head_home.php'
+  ?>
 
-  <!-- Inclua aqui os links para os arquivos CSS do Bootstrap e Leaflet -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
-
-  <style>
-    /* Estilos personalizados */
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    #map {
-      height: calc(100vh - 200px);
-    }
-
-    .sidebar {
-      background-color: #f8f9fa;
-      height: 100vh;
-      padding: 10px;
-    }
-
-    .navbar-brand {
-      font-weight: bold;
-    }
-
-    .nav-link {
-      color: #000;
-    }
-
-    .news {
-      margin-top: 20px;
-    }
-  </style>
-</head>
-
-<body>
+<header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="#">Itaqua Alerta</a>
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#" id="logo">
+        <img src="../public/img/logo-index.png" height="60" alt="">
+        Itaqua Alerta
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -77,7 +36,9 @@ if (!isset($_SESSION["autenticado"]) || $_SESSION["autenticado"] != 'SIM') {
       </div>
     </div>
   </nav>
+</header>
 
+<body>
   <div class="container-fluid">
     <div class="row" style="height: 100%;">
       <div class="col-md-3 bg-light sidebar">

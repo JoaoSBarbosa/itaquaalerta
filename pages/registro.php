@@ -30,7 +30,7 @@
         <div class="card-body">
 
           <div class="d-flex justify-content-center">
-            <img src="../public/img/inscrevase.png" height="80" />
+            <img src="../public/img/inscreva-se.svg" height="220" />
           </div>
 
           <div class="row">
