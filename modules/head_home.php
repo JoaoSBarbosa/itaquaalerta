@@ -16,14 +16,31 @@
       padding: 0;
     }
 
+    #section-home {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+    }
+
+    #section-info {
+      width: 100%;
+      padding: 0;
+
+    }
+
     #map {
       height: calc(100vh - 200px);
+      width: 100%;
     }
 
     .sidebar {
-      background-color: #f8f9fa;
       height: 100vh;
-      padding: 10px;
+      padding: 10px 5px;
+      width: 100%;
+      text-align: left;
+    }
+
+    #nav-homer a {
+      text-align: left;
     }
 
     .navbar-brand {
@@ -36,6 +53,13 @@
 
     .news {
       margin-top: 20px;
+    }
+
+    .sucesso {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
     }
   </style>
 </head>

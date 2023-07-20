@@ -24,13 +24,13 @@ require_once '../modules/head_home.php'
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
             <!-- Exibir nome do usuário logado -->
-            <span class="nav-link">Bem-vindo(a),
+            <span class="nav-link text-white">Bem-vindo(a),
               <?php echo $_SESSION["usuarioNome"]; ?>
             </span>
 
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="logout.php">Sair</a>
+            <a class="nav-link text-danger" href="logout.php">Sair</a>
           </li>
         </ul>
       </div>
@@ -40,23 +40,23 @@ require_once '../modules/head_home.php'
 
 <body>
   <div class="container-fluid">
-    <div class="row" style="height: 100%;">
-      <div class="col-md-3 bg-light sidebar">
+    <div class="row" style="height: 100%;" id="section-home">
+      <div class="col-md-3 bg-secondary sidebar">
         <!-- Menu lateral -->
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link btn btn-light" href="#">Minhas Denúncias</a>
+        <ul class="nav flex-column align-items-start" id="nav-homer">
+          <li class="nav-item w-100">
+            <a class="nav-link btn btn-dark w-100 text-white" href="consultar_denuncia.php">Minhas Denúncias</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link btn btn-light" href="#">Fazer Denúncia</a>
+          <li class="nav-item w-100">
+            <a class="nav-link btn btn-dark w-100 text-white" href="inserir_denuncia.php">Fazer Denúncia</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link btn btn-light" href="#">Perfil</a>
+          <li class="nav-item w-100 text-left">
+            <a class="nav-link btn btn-dark w-100 text-white" href="#">Perfil</a>
           </li>
           <!-- Adicione mais opções de menu conforme necessário -->
         </ul>
       </div>
-      <div class="col-md-9">
+      <div class="col-md-9" id="section-info">
         <!-- Mapa -->
         <div id="map"></div>
 

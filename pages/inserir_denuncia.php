@@ -1,7 +1,13 @@
 <?php
 require_once '../validator/validador_acesso.php';
-require_once '../modules/header.php'
-  ?>
+require_once '../modules/header.php';
+
+
+if (isset($_SESSION["autenticado"]) && $_SESSION["autenticado"] === "SIM") {
+  // O usuário está autenticado
+  $usuario_id = $_SESSION["usuarioId"];
+}
+?>
 
 <body>
 
@@ -21,7 +27,9 @@ require_once '../modules/header.php'
             <div class="row">
               <div class="col">
 
-                <form action="inserir_denuncia.php" method="POST" enctype="multipart/form-data">
+                <form action="../validator/valida_denuncia.php" method="POST" enctype="multipart/form-data">
+                  <input type="hidden" name="usuario_id" value="<?php echo $usuario_id; ?>">
+
                   <div class="form-group">
                     <label>Título</label>
                     <input type="text" class="form-control" placeholder="Título" name="titulo">
@@ -68,62 +76,3 @@ require_once '../modules/header.php'
 </body>
 
 </html>
-
-<?php
-include 'db_connect.php';
-
-// Verifica se o formulário foi enviado
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Obtém os dados do formulário
-  $titulo = $_POST['titulo'];
-  $categoria = $_POST['categoria'];
-  $descricao = $_POST['descricao'];
-
-  // Verifica se foi enviado um arquivo de foto
-  if (isset($_FILES['foto'])) {
-    $foto = $_FILES['foto']['name'];
-    $foto_tmp = $_FILES['foto']['tmp_name'];
-
-    // Move o arquivo para uma pasta de destino
-    move_uploaded_file($foto_tmp, "caminho/da/pasta/destino/" . $foto);
-  }
-
-
-  include 'db_connect.php';
-
-  // Verifica se o formulário foi enviado
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtém os dados do formulário
-    $titulo = $_POST['titulo'];
-    $categoria = $_POST['categoria'];
-    $descricao = $_POST['descricao'];
-
-    // Verifica se foi enviado um arquivo de foto
-    if (isset($_FILES['foto'])) {
-      $foto = $_FILES['foto']['name'];
-      $foto_tmp = $_FILES['foto']['tmp_name'];
-
-      // Move o arquivo para uma pasta de destino
-      move_uploaded_file($foto_tmp, "caminho/da/pasta/destino/" . $foto);
-    }
-
-    // Insira aqui o código para salvar os dados no banco de dados
-    $sql = "INSERT INTO denuncia (titulo, categoria, descricao, foto) VALUES ('$titulo', '$categoria', '$descricao', '$foto')";
-    if ($conn->query($sql) === TRUE) {
-      echo "Denúncia inserida com sucesso!";
-    } else {
-      echo "Erro ao inserir denúncia: " . $conn->error;
-    }
-  }
-
-  $conn->close();
-
-
-  // ...
-  // Use as variáveis $titulo, $categoria, $descricao e $foto para inserir no banco de dados
-
-  echo "Denúncia inserida com sucesso!";
-}
-
-$conn->close();
-?>
