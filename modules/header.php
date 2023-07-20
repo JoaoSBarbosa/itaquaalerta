@@ -1,33 +1,36 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<header>
+  <!-- MENU SUPERIOR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Itaquá Alerta <i class="fas fa-bullhorn"></i>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- Centraliza o texto apenas em dispositivos maiores que md -->
+          <li class="nav-item d-none d-md-block">
+            <span class="nav-link text-center">Bem-vindo(a),
+              <?php echo $_SESSION["usuarioNome"]; ?>
+            </span>
+          </li>
+        </ul>
 
-  <title>Itaquá Alerta</title>
+        <!-- Mantém o formulário de pesquisa à direita -->
+        <form class="form-inline my-2 my-lg-0 ml-auto">
+          <div class="input-group">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </div>
+        </form>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-
-
-  <style>
-    /* Estilos personalizados */
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-
-    .card-abrir-chamado {
-      padding: 30px 0 0 0;
-      width: 100%;
-      margin: 0 auto;
-    }
-  </style>
-</head>
+        <!-- Centraliza o texto apenas em dispositivos menores que md -->
+        <span class="nav-link text-center d-md-none">Bem-vindo(a),
+          <?php echo $_SESSION["usuarioNome"]; ?>
+        </span>
+      </div>
+    </div>
+  </nav>
+</header>

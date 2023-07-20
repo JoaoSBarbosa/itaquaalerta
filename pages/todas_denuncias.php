@@ -2,8 +2,8 @@
 require_once '../validator/validador_acesso.php';
 require_once 'db_connect.php';
 
-// Função para obter as denúncias feitas pelo usuário logado
-function getDenunciasByUsuario($categoriaSelecionada = null)
+// Função para obter todas as denúncias do banco de dados
+function getAllDenuncias($categoriaSelecionada = null)
 {
   global $conn; // Torna a variável $conn globalmente acessível dentro da função
 
@@ -13,8 +13,16 @@ function getDenunciasByUsuario($categoriaSelecionada = null)
 
     // Verifica se a conexão está estabelecida corretamente
     if ($conn) {
-      // Monta a query para consultar as denúncias do usuário logado
-      $sql = "SELECT titulo, descricao, foto FROM denuncias WHERE usuario_id = '$usuario_id' ORDER BY id DESC";
+      // Monta a query para consultar as denúncias
+      $sql = "SELECT titulo, descricao, foto FROM denuncias";
+
+      // Se uma categoria foi selecionada, filtra as denúncias por categoria
+      if ($categoriaSelecionada) {
+        $categoriaSelecionada = $conn->real_escape_string($categoriaSelecionada); // Evita SQL injection
+        $sql .= " WHERE categoria = '$categoriaSelecionada'";
+      }
+
+      $sql .= " ORDER BY id DESC";
 
       $resultado = $conn->query($sql);
 
@@ -34,8 +42,34 @@ function getDenunciasByUsuario($categoriaSelecionada = null)
 
   return array(); // Caso o usuário não esteja autenticado ou não haja denúncias, retorna um array vazio
 }
-require_once '../modules/head.php';
-?>
+
+// Função para obter todas as categorias do banco de dados
+function getAllCategorias()
+{
+  global $conn;
+
+  if ($conn) {
+    // Use DISTINCT para obter apenas categorias únicas da tabela de denúncias
+    $sql = "SELECT DISTINCT categoria FROM denuncias";
+    $resultado = $conn->query($sql);
+
+    $categorias = array();
+
+    if ($resultado && $resultado->num_rows > 0) {
+      while ($categoria = $resultado->fetch_assoc()) {
+        $categorias[] = $categoria;
+      }
+    }
+
+    return $categorias;
+  } else {
+    echo "Erro ao conectar ao banco de dados.";
+  }
+
+  return array();
+}
+require_once '../modules/head.php'
+  ?>
 
 <body>
   <?php
@@ -52,7 +86,7 @@ require_once '../modules/head.php';
 
       <!-- Conteúdo principal (todas as denúncias) -->
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <h3 class="text-center mt-3">Minhas Denúncias</h3>
+        <h3 class="text-center mt-3">Todas as Denúncias</h3>
         <form method="get" class="mb-4">
           <div class="form-group">
             <label for="categoria">Filtrar por Categoria:</label>

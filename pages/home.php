@@ -1,133 +1,148 @@
 <?php
 require_once '../validator/validador_acesso.php';
+require_once 'db_connect.php';
+
+// Função para obter as denúncias do banco de dados
+function getDenuncias()
+{
+  global $conn; // Torna a variável $conn globalmente acessível dentro da função
+
+  if (isset($_SESSION["autenticado"]) && $_SESSION["autenticado"] === "SIM") {
+    // O usuário está autenticado
+    $usuario_id = $_SESSION["usuarioId"];
+
+    // Verifica se a conexão está estabelecida corretamente
+    if ($conn) {
+      // Consultar as denúncias feitas pelo usuário
+      $sql = "SELECT titulo, descricao, foto FROM denuncias WHERE usuario_id = '$usuario_id' ORDER BY id DESC";
+      $resultado = $conn->query($sql);
+
+      $denuncias = array();
+
+      if ($resultado && $resultado->num_rows > 0) {
+        while ($denuncia = $resultado->fetch_assoc()) {
+          $denuncias[] = $denuncia;
+        }
+      }
+
+      return $denuncias;
+    } else {
+      echo "Erro ao conectar ao banco de dados.";
+    }
+  }
+
+  return array(); // Caso o usuário não esteja autenticado ou não tenha denúncias, retorna um array vazio
+}
 ?>
 
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
-<?php
-require_once '../modules/head_home.php'
-  ?>
-
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center gap-2" href="#" id="logo">
-        <img src="../public/img/logo-index.png" height="60" alt="">
-        Itaqua Alerta
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <!-- Exibir nome do usuário logado -->
-            <span class="nav-link text-white">Bem-vindo(a),
-              <?php echo $_SESSION["usuarioNome"]; ?>
-            </span>
-
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-danger" href="logout.php">Sair</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Itaqua Alerta - Home</title>
+  <!-- Arquivos CSS do Bootstrap e Leaflet -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+</head>
 
 <body>
-  <div class="container-fluid">
-    <div class="row" style="height: 100%;" id="section-home">
-      <div class="col-md-3 bg-secondary sidebar">
-        <!-- Menu lateral -->
-        <ul class="nav flex-column align-items-start" id="nav-homer">
-          <li class="nav-item w-100">
-            <a class="nav-link btn btn-dark w-100 text-white" href="consultar_denuncia.php">Minhas Denúncias</a>
-          </li>
-          <li class="nav-item w-100">
-            <a class="nav-link btn btn-dark w-100 text-white" href="inserir_denuncia.php">Fazer Denúncia</a>
-          </li>
-          <li class="nav-item w-100 text-left">
-            <a class="nav-link btn btn-dark w-100 text-white" href="#">Perfil</a>
-          </li>
-          <!-- Adicione mais opções de menu conforme necessário -->
-        </ul>
-      </div>
-      <div class="col-md-9" id="section-info">
-        <!-- Mapa -->
-        <div id="map"></div>
+  <?php
+  require_once '../modules/header.php'
+    ?>
 
-        <!-- Notícias -->
-        <div class="col-md-3">
-          <!-- Notícias -->
-          <div id="news">
-            <h3>Últimas Notícias</h3>
-            <ul id="news-list"></ul>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Barra lateral esquerda (mapa) -->
+      <?php
+      require_once '../modules/barra_lateral.php'
+        ?>
+
+      <!-- Conteúdo principal (slide de denúncias) -->
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <!-- Mapa -->
+        <div id="map" style="height: 300px;"></div>
+        <h3 class="text-center mt-3">Últimas Denúncias</h3>
+        <div id="denuncias-slider" class="carousel slide d-md-none" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <?php
+            $denuncias = getDenuncias();
+            $numDenuncias = count($denuncias);
+
+            for ($i = 0; $i < $numDenuncias; $i++) {
+              $active = $i === 0 ? 'active' : '';
+              $denuncia = $denuncias[$i];
+              $titulo = $denuncia['titulo'];
+              $descricao = $denuncia['descricao'];
+              $imagem = $denuncia['foto'];
+              ?>
+              <div class="carousel-item <?php echo $active; ?>">
+                <div class="row" style="border:2px solid red">
+                  <div class="col-md-12 mb-4">
+                    <div class="card h-90" style="border:2px solid red">
+                      <img src="../upload/<?php echo $imagem; ?>" class="card-img-top" alt="<?php echo $titulo; ?>" width="300">
+                      <div class="card-body">
+                        <h5 class="card-title">
+                          <?php echo $titulo; ?>
+                        </h5>
+                        <p class="card-text">
+                          <?php echo $descricao; ?>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <?php
+            }
+            ?>
           </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#denuncias-slider" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#denuncias-slider" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
-      </div>
+
+        <!-- Denúncias em cards lado a lado na versão desktop -->
+        <div class="row d-none d-md-flex">
+          <?php
+          for ($i = 0; $i < $numDenuncias; $i++) {
+            $denuncia = $denuncias[$i];
+            $titulo = $denuncia['titulo'];
+            $descricao = $denuncia['descricao'];
+            $imagem = $denuncia['foto'];
+            ?>
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
+                <img src="../upload/<?php echo $imagem; ?>" class="card-img-top" alt="<?php echo $titulo; ?>">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <?php echo $titulo; ?>
+                  </h5>
+                  <p class="card-text">
+                    <?php echo $descricao; ?>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <?php
+          }
+          ?>
+        </div>
+      </main>
     </div>
   </div>
 
   <!-- Inclua aqui os scripts necessários para o serviço de mapa e notícias -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    // Inicializar o mapa
-    var latitude = -23.543;
-    var longitude = -46.736;
-    var zoom = 12;
-
-    var map = L.map('map').setView([latitude, longitude], zoom);
-
-    // Adicionar camada de mapa
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-      maxZoom: 18,
-    }).addTo(map);
-
-    // Adicionar marcador
-    L.marker([latitude, longitude]).addTo(map);
-
-    // Função para buscar as notícias
-    function getNews() {
-      var url = 'https://newsapi.org/v2/everything?' +
-        'q=ruas+esburacadas&' + // Termo de busca relacionado às ruas esburacadas
-        'from=2023-07-19&' + // Data de início da busca
-        'sortBy=popularity&' + // Ordenar por popularidade
-        'apiKey=d447be91488848cdb8d316bfa1f27e16'; // Insira sua chave de API do NewsAPI aqui
-
-      fetch(url)
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          var newsList = document.getElementById('news-list');
-          data.articles.forEach(function (article) {
-            var li = document.createElement('li');
-            var link = document.createElement('a');
-            link.href = article.url;
-            link.textContent = article.title;
-            li.appendChild(link);
-            newsList.appendChild(li);
-          });
-        })
-        .catch(function (error) {
-          console.log('Erro ao buscar notícias:', error);
-        });
-    }
-
-    // Chamar a função para obter a localização do usuário e exibir o mapa
-    getLocation();
-
-    // Chamar a função para buscar as notícias
-    getNews();
-  </script>
+  <script src="../public/js/home.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 
 </html>

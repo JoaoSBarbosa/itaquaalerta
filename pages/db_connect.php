@@ -1,3 +1,4 @@
+<!-- db_coonect.php -->
 <?php
 $servername = "localhost";
 $username = "root";
