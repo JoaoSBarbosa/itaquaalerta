@@ -52,12 +52,12 @@ require_once '../modules/head.php'
                   <label for="categoria" class="form-label">Categoria</label>
                   <select class="form-select" id="categoria" name="categoria" required>
                     <option value="">Selecione uma categoria</option>
-                    <option value="rua_degradada">Rua Degradada</option>
+                    <option value="rua_degradada">Rua degradada</option>
                     <option value="violencia">Violência e Roubo</option>
                     <option value="poluição">Poluição Ambiental</option>
                     <option value="serviços_publicos">Serviços Públicos</option>
-                    <option value="Categoria 5">Alagamento</option>
-                    <option value="agua_energia 5">Agua e Energia</option>
+                    <option value="alagamento">Alagamento</option>
+                    <option value="agua_energia">Agua e Energia</option>
                     <option value="outros">Outros</option>
                   </select>
                 </div>

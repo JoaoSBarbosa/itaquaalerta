@@ -9,10 +9,15 @@ $dbname = "itaqua_alerta";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verifica a conexão
+// if ($conn->connect_error) {
+//   die("Erro na conexão com o banco de dados: " . $conn->connect_error);
+// }
+// Verifica a conexão
 if ($conn->connect_error) {
   die("Erro na conexão com o banco de dados: " . $conn->connect_error);
-}
+} else {
 
+}
 // Função para obter as denúncias do banco de dados
 function getDenuncias()
 {
@@ -25,7 +30,7 @@ function getDenuncias()
     // Verifica se a conexão está estabelecida corretamente
     if ($conn) {
       // Consultar as 3 últimas denúncias feitas pelo usuário
-      $sql = "SELECT titulo, descricao, foto FROM denuncias WHERE usuario_id = '$usuario_id' ORDER BY id DESC LIMIT 3";
+      $sql = "SELECT titulo, descricao,categoria, foto FROM denuncias WHERE usuario_id = '$usuario_id' ORDER BY id DESC LIMIT 3";
       $resultado = $conn->query($sql);
 
       $denuncias = array();

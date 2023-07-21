@@ -26,21 +26,27 @@ function atualizarUsuario($email, $celular, $senha)
 {
   global $conn;
   $usuario_id = $_SESSION["usuarioId"];
-  $email = $conn->real_escape_string($email);
-  $celular = $conn->real_escape_string($celular);
-  $senha = $conn->real_escape_string($senha);
 
   if ($conn) {
-    // Use a função password_hash para armazenar a senha de forma segura
-    $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+    // Realiza a atualização dos dados do usuário
+    $sql = "UPDATE usuarios SET email = '$email', celular = '$celular'";
 
-    $sql = "UPDATE usuarios SET email = '$email', celular = '$celular', senha = '$senha_hash' WHERE id = '$usuario_id'";
-    $resultado = $conn->query($sql);
+    if (!empty($senha)) {
+      // Se o campo Nova Senha estiver preenchido, atualizamos também a senha
+      $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+      $sql .= ", senha = '$senha_hash'";
+    }
 
-    return $resultado;
+    $sql .= " WHERE id = '$usuario_id'";
+
+    if ($conn->query($sql) === TRUE) {
+      return true; // Dados do usuário atualizados com sucesso
+    } else {
+      return false; // Erro ao atualizar os dados do usuário
+    }
   }
 
-  return false;
+  return false; // Erro ao conectar ao banco de dados
 }
 
 require_once '../modules/head.php';
@@ -64,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <?php require_once '../modules/header.php'; ?>
 
   <div class="container-fluid">
-    <div class="row">
+    <div class="row" style="height: 100vh;">
       <!-- Barra lateral esquerda -->
       <?php require_once '../modules/barra_lateral.php'; ?>
 
@@ -72,68 +78,83 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 h-100" style="height: 100vh;">
         <h3 class="text-center mt-3">Meu Perfil</h3>
 
-        <!-- Dados do usuário -->
-        <div class="row mb-4 ">
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Dados Pessoais</h5>
-                <?php
-                $dadosUsuario = getUsuarioData();
-                if (!empty($dadosUsuario)) {
-                  echo '<p><strong>Nome:</strong> ' . $dadosUsuario['nome'] . '</p>';
-                  // Exibir o formulário para editar os dados do usuário
-                  echo '
-                  <form method="post">
-                    <div class="form-group">
-                      <label for="email">Email:</label>
-                      <input type="email" class="form-control" id="email" name="email" value="' . $dadosUsuario['email'] . '">
-                    </div>
-                    <div class="form-group">
-                      <label for="celular">Celular:</label>
-                      <input type="text" class="form-control" id="celular" name="celular" value="' . $dadosUsuario['celular'] . '">
-                    </div>
-                    <div class="form-group">
-                      <label for="senha">Nova Senha:</label>
-                      <input type="password" class="form-control" id="senha" name="senha" value="">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-                  </form>';
-                } else {
-                  echo '<p>Dados não encontrados.</p>';
-                }
-                ?>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- Guia para alternar entre Dados Pessoais e Minhas Denúncias -->
+        <ul class="nav nav-tabs mt-4">
+          <li class="nav-item">
+            <a class="nav-link active" data-bs-toggle="tab" href="#dados-pessoais">Dados Pessoais</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#minhas-denuncias">Minhas Denúncias</a>
+          </li>
+        </ul>
 
-        <!-- Denúncias do usuário -->
-        <h4 class="text-center mt-3">Minhas Denúncias</h4>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-          <?php
-          $denuncias = getDenuncias();
-          foreach ($denuncias as $denuncia) {
-            $titulo = $denuncia['titulo'];
-            $descricao = $denuncia['descricao'];
-            $imagem = $denuncia['foto'];
-            ?>
-            <div class="col mb-4">
-              <div class="card h-100">
-                <img src="../upload/<?php echo $imagem; ?>" class="card-img-top" alt="<?php echo $titulo; ?>">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    <?php echo $titulo; ?>
-                  </h5>
-                  <p class="card-text">
-                    <?php echo $descricao; ?>
-                  </p>
+        <div class="tab-content mt-4">
+          <!-- Dados Pessoais -->
+          <div class="tab-pane fade show active" id="dados-pessoais">
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Dados Pessoais</h5>
+                    <?php
+                    $dadosUsuario = getUsuarioData();
+                    if (!empty($dadosUsuario)) {
+                      echo '<p><strong>Nome:</strong> ' . $dadosUsuario['nome'] . '</p>';
+                      echo '
+                                            <form method="post">
+                                                <div class="form-group">
+                                                    <label for="email">Email:</label>
+                                                    <input type="email" class="form-control" id="email" name="email" value="' . $dadosUsuario['email'] . '">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="celular">Celular:</label>
+                                                    <input type="text" class="form-control" id="celular" name="celular" value="' . $dadosUsuario['celular'] . '">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="senha">Nova Senha:</label>
+                                                    <input type="password" class="form-control" id="senha" name="senha" value="">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary my-4">Salvar Alterações</button>
+                                            </form>';
+                    } else {
+                      echo '<p>Dados não encontrados.</p>';
+                    }
+                    ?>
+                  </div>
                 </div>
               </div>
             </div>
-            <?php
-          }
-          ?>
+          </div>
+
+          <!-- Minhas Denúncias -->
+          <div class="tab-pane fade" id="minhas-denuncias">
+            <h4 class="text-center mt-3">Minhas Denúncias</h4>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+              <?php
+              $denuncias = getDenuncias();
+              foreach ($denuncias as $denuncia) {
+                $titulo = $denuncia['titulo'];
+                $descricao = $denuncia['descricao'];
+                $imagem = $denuncia['foto'];
+                ?>
+                <div class="col mb-4">
+                  <div class="card h-100">
+                    <img src="../upload/<?php echo $imagem; ?>" class="card-img-top" alt="<?php echo $titulo; ?>">
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        <?php echo $titulo; ?>
+                      </h5>
+                      <p class="card-text">
+                        <?php echo $descricao; ?>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <?php
+              }
+              ?>
+            </div>
+          </div>
         </div>
       </main>
     </div>

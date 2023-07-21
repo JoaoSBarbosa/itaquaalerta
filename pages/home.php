@@ -3,6 +3,16 @@ require_once 'db_connect.php';
 require_once '../validator/validador_acesso.php';
 require_once '../modules/head.php';
 ?>
+<style>
+  .card-img-top {
+    width: 100%;
+    /* Definir a largura da imagem como 100% do contêiner pai */
+    height: 350px;
+    /* Definir uma altura fixa ou a altura desejada */
+    object-fit: cover;
+    /* Faz com que a imagem preencha o espaço sem perder a proporção */
+  }
+</style>
 
 <body>
   <?php
@@ -29,14 +39,19 @@ require_once '../modules/head.php';
             $titulo = $denuncia['titulo'];
             $descricao = $denuncia['descricao'];
             $imagem = $denuncia['foto'];
+            $categoria = $denuncia['categoria'];
             ?>
             <div class="col mb-4">
               <div class="card h-100">
                 <img src="../upload/<?php echo $imagem; ?>" class="card-img-top" alt="<?php echo $titulo; ?>">
                 <div class="card-body">
-                  <h5 class="card-title">
+                  <span class="categoria bg-primary text-white rounded px-2 py-1" style="font-size: 12px;">
+                    <?php echo $categoria; ?>
+                  </span>
+                  <h5 class="card-title" style="margin: 10px 0px;">
                     <?php echo $titulo; ?>
                   </h5>
+
                   <p class="card-text">
                     <?php echo $descricao; ?>
                   </p>

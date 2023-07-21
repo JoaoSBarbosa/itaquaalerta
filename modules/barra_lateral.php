@@ -1,4 +1,4 @@
-<nav id="sidebar" class="col-md-3 bg-primary col-lg-2 d-md-block sidebar" style="background-color:#808080;">
+<nav id="sidebar" class="col-md-2 bg-primary col-lg-2 d-md-block sidebar" style="background-color:#808080;">
   <div class="position-sticky">
     <ul class="nav flex-column">
       <li class="nav-item">

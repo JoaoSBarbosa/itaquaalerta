@@ -90,7 +90,7 @@ function getAllCategorias()
   <?php require_once '../modules/header.php'; ?>
 
   <div class="container-fluid">
-    <div class="row">
+    <div class="row" style="height: 100vh;">
       <!-- Barra lateral esquerda -->
       <?php require_once '../modules/barra_lateral.php'; ?>
 
