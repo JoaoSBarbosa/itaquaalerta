@@ -9,7 +9,6 @@ function initMap(latitude, longitude) {
 
   L.marker([latitude, longitude]).addTo(map);
 }
-
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -17,12 +16,14 @@ function getLocation() {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
         initMap(latitude, longitude);
+        getDenunciasAndDisplay();
       },
       function (error) {
         console.error("Erro ao obter a localização do usuário:", error);
         const defaultLatitude = -23.543;
         const defaultLongitude = -46.736;
         initMap(defaultLatitude, defaultLongitude);
+        getDenunciasAndDisplay();
       }
     );
   } else {
@@ -30,12 +31,12 @@ function getLocation() {
     const defaultLatitude = -23.543;
     const defaultLongitude = -46.736;
     initMap(defaultLatitude, defaultLongitude);
+    getDenunciasAndDisplay();
   }
 }
-
 function getDenuncias(callback) {
   $.ajax({
-    url: "get_denuncias.php",
+    url: "../pages/get_denuncias.php",
     method: "GET",
     dataType: "json",
     success: function (denuncias) {
@@ -43,37 +44,33 @@ function getDenuncias(callback) {
     },
     error: function (jqXHR, textStatus, errorThrown) {
       console.error("Erro ao obter denúncias:", textStatus, errorThrown);
-      console.log(jqXHR.responseText); // Exibe a resposta recebida no console para depuração
       callback(null);
     },
   });
 }
 
 function displayDenuncias(denuncias) {
-  const sliderInner = document.querySelector(
-    "#denuncias-slider .carousel-inner"
-  );
-  sliderInner.innerHTML = ""; // Limpa o conteúdo anterior do slider
+  const denunciasContainer = document.getElementById("denuncias-container");
+  denunciasContainer.innerHTML = ""; // Limpa o conteúdo anterior do container
 
-  denuncias.forEach((denuncia, index) => {
-    const isActive = index === 0 ? "active" : ""; // Define a classe "active" para o primeiro slide
-    const slide = `
-      <div class="carousel-item ${isActive}">
-        <img src="../upload/${denuncia.foto}" class="d-block w-100" alt="${denuncia.titulo}">
-        <div class="carousel-caption">
-          <h3>${denuncia.titulo}</h3>
-          <p>${denuncia.descricao}</p>
+  denuncias.forEach((denuncia) => {
+    const { titulo, descricao, foto } = denuncia;
+    const card = `
+      <div class="col mb-4">
+        <div class="card h-100">
+          <img src="../upload/${foto}" class="card-img-top" alt="${titulo}">
+          <div class="card-body">
+            <h5 class="card-title">${titulo}</h5>
+            <p class="card-text">${descricao}</p>
+          </div>
         </div>
       </div>
     `;
-    sliderInner.insertAdjacentHTML("beforeend", slide);
+    denunciasContainer.insertAdjacentHTML("beforeend", card);
   });
 }
 
-$(document).ready(function () {
-  getLocation();
-
-  // Obtém as denúncias e exibe no slider ao carregar a página
+function getDenunciasAndDisplay() {
   getDenuncias(function (denuncias) {
     if (denuncias) {
       displayDenuncias(denuncias);
@@ -81,4 +78,8 @@ $(document).ready(function () {
       console.error("Erro ao obter denúncias.");
     }
   });
+}
+
+$(document).ready(function () {
+  getLocation();
 });

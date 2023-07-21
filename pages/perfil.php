@@ -69,11 +69,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <?php require_once '../modules/barra_lateral.php'; ?>
 
       <!-- Conteúdo principal (perfil do usuário) -->
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="height: 100vh;">
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 h-100" style="height: 100vh;">
         <h3 class="text-center mt-3">Meu Perfil</h3>
 
         <!-- Dados do usuário -->
-        <div class="row mb-4">
+        <div class="row mb-4 ">
           <div class="col-md-6">
             <div class="card">
               <div class="card-body">
@@ -110,8 +110,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <!-- Denúncias do usuário -->
         <h4 class="text-center mt-3">Minhas Denúncias</h4>
-        <!-- Restante do código para exibir as denúncias do usuário... -->
-
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <?php
+          $denuncias = getDenuncias();
+          foreach ($denuncias as $denuncia) {
+            $titulo = $denuncia['titulo'];
+            $descricao = $denuncia['descricao'];
+            $imagem = $denuncia['foto'];
+            ?>
+            <div class="col mb-4">
+              <div class="card h-100">
+                <img src="../upload/<?php echo $imagem; ?>" class="card-img-top" alt="<?php echo $titulo; ?>">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <?php echo $titulo; ?>
+                  </h5>
+                  <p class="card-text">
+                    <?php echo $descricao; ?>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <?php
+          }
+          ?>
+        </div>
       </main>
     </div>
   </div>
@@ -120,7 +143,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 
 </html>

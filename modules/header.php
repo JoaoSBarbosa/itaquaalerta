@@ -2,7 +2,7 @@
   <!-- MENU SUPERIOR -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Itaquá Alerta <i class="fas fa-bullhorn"></i>
+      <a class="navbar-brand" href="./home.php">Itaquá Alerta <i class="fas fa-bullhorn"></i>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -17,14 +17,27 @@
             </span>
           </li>
         </ul>
+        <!-- Ícones para GitHub e LinkedIn -->
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/seu_usuario" target="_blank">
+              <i class="fab fa-github fa-2x"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.linkedin.com/in/seu_usuario" target="_blank">
+              <i class="fab fa-linkedin fa-2x"></i>
+            </a>
+          </li>
+        </ul>
+        <!-- Botão de Logout -->
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link text-danger" href="logout.php">Sair</a>
+          </li>
+        </ul>
 
-        <!-- Mantém o formulário de pesquisa à direita -->
-        <form class="form-inline my-2 my-lg-0 ml-auto">
-          <div class="input-group">
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </div>
-        </form>
+
 
         <!-- Centraliza o texto apenas em dispositivos menores que md -->
         <span class="nav-link text-center d-md-none">Bem-vindo(a),

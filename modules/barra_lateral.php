@@ -5,7 +5,7 @@
         <a class="nav-link text-white" href="consultar_denuncia.php">
           <i class="fas fa-search"></i>
 
-          Minhas Denúncias</a>
+          Todas as Denúncias</a>
       </li>
       <li class="nav-item">
         <a class="nav-link text-white" href="inserir_denuncia.php"><i class="fas fa-exclamation-circle">
@@ -13,7 +13,7 @@
           </i> Fazer Denúncia</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="#"><i class="fas fa-user"></i>
+        <a class="nav-link text-white" href="perfil.php"><i class="fas fa-user"></i>
           Perfil</a>
       </li>
     </ul>
