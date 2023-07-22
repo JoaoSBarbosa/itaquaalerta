@@ -10,6 +10,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $usuario_id = $_POST["usuario_id"];
   $titulo = $_POST["titulo"];
   $categoria = $_POST["categoria"];
+  $bairro = $_POST["bairro_da_ocorrencia"];
+  $rua = $_POST["rua_da_ocorrencia"];
+  $numero = $_POST["numero_aproximado"];
+  $data_ocorrencia = $_POST["data_da_ocorrencia"];
   $descricao = $_POST["descricao"];
 
   // Verificar se foi enviado um arquivo de foto
@@ -36,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   }
 
   // Inserir os dados na tabela de denúncias
-  $sql = "INSERT INTO denuncias (titulo, categoria, descricao, foto, usuario_id) VALUES ('$titulo', '$categoria', '$descricao', '$nomeArquivo', '$usuario_id')";
+  $sql = "INSERT INTO denuncias (titulo, categoria,bairro_da_ocorrencia,rua_da_ocorrencia,numero_aproximado,data_da_ocorrencia, descricao, foto, usuario_id) VALUES ('$titulo', '$categoria', '$bairro','$rua','$numero','$data_ocorrencia','$descricao', '$nomeArquivo', '$usuario_id')";
 
   if ($conn->query($sql) === TRUE) {
     // Sucesso ao inserir os dados

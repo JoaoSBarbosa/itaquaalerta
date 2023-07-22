@@ -1,7 +1,14 @@
 <?php
 session_start();
-print_r($_SESSION);
-echo '<hr/>';
+// print_r($_SESSION);
+// echo '<hr/>';
+// Verifica se o usuário já está logado
+if (isset($_SESSION["autenticado"]) && $_SESSION["autenticado"] == 'SIM') {
+  // Usuário já está logado, redireciona para a página home.php
+  header("Location: ../pages/home.php");
+  exit;
+}
+
 $usuario_autenticado = false;
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   // Conectar-se ao banco de dados

@@ -1,0 +1,70 @@
+/* ESTILO HOME */
+/* .map-container {
+  position: relative;
+}
+#map {
+  width: 100%;
+  height: 30vh;
+}
+
+.ultimas_denuncias {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 5px;
+  border: 2px solid red;
+}
+
+.container_denuncias {
+  margin: 10px;
+}
+
+.denuncia_item {
+  padding: 10px;
+  border: 2px solid #cccccc;
+  border-radius: 8px;
+  -webkit-box-shadow: -8px 0px 17px -16px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -8px 0px 17px -16px rgba(0, 0, 0, 0.75);
+  box-shadow: -8px 0px 17px -16px rgba(0, 0, 0, 0.75);
+}
+.denuncia_conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
+}
+.img {
+  position: relative;
+}
+.card-img-top {
+  object-fit: cover;
+  height: 300px;
+  border-radius: 8px;
+}
+
+.categoria {
+  font-size: 12px;
+  max-width: max-content;
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+}
+
+@media (max-width: 992px) {
+  .denuncia_item {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}
+@media (max-width: 1330px) {
+  .ultimas_denuncias {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 890px) {
+  .ultimas_denuncias {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+} */

@@ -125,13 +125,26 @@ h1 {
   display: inline-block;
   transition: background-color 0.3s ease;
 }
-/* PAINEL */
+/* PAINEL --MANTERRRRRRRRRR */
 #section-container {
   display: grid;
   grid-template-columns: 200px 1fr;
-  height: calc(100vh - 90px);
+  /* height: calc(100vh - 90px); */
+  border: 2px solid red;
+  grid-template-columns: 200px 1fr;
 }
-
+@media (max-width: 700px) {
+  #section-container {
+    grid-template-columns: 1fr;
+  }
+}
+#teste {
+  border: 2px solid green;
+}
+#teste-section_ultimas_denuncias {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
 #section-info {
   width: 100%;
   padding: 0;
@@ -143,7 +156,7 @@ h1 {
 }
 
 .sidebar {
-  height: 100vh;
+  /* height: 100vh; */
   padding: 10px 5px;
   width: 100%;
   text-align: left;
@@ -214,10 +227,10 @@ h1 {
     grid-template-columns: 1fr;
   }
 
-  .formulario {
+  /* .formulario {
     width: 90%;
     padding: 5px;
-  }
+  } */
 
   .communicationItem {
     font-size: 1rem;
@@ -253,5 +266,11 @@ h1 {
   .title,
   .subtitle {
     font-size: 1.2rem;
+  }
+}
+@media (max-width: 767.98px) {
+  #sidebar {
+    height: auto;
+    /* Definimos a altura para automática em telas menores */
   }
 }

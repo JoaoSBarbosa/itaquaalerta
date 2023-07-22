@@ -1,3 +1,12 @@
+function toggleSidebar() {
+  const sidebar = document.querySelector(".sidebar");
+  sidebar.classList.toggle("collapsed");
+
+  // Oculta ou exibe o menu do header para dispositivos móveis
+  const headerMobile = document.querySelector(".mobile-menu");
+  headerMobile.classList.toggle("header-mobile-visible");
+}
+
 function initMap(latitude, longitude) {
   const map = L.map("map").setView([latitude, longitude], 12);
 
@@ -9,6 +18,7 @@ function initMap(latitude, longitude) {
 
   L.marker([latitude, longitude]).addTo(map);
 }
+
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -16,14 +26,12 @@ function getLocation() {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
         initMap(latitude, longitude);
-        getDenunciasAndDisplay();
       },
       function (error) {
         console.error("Erro ao obter a localização do usuário:", error);
         const defaultLatitude = -23.543;
         const defaultLongitude = -46.736;
         initMap(defaultLatitude, defaultLongitude);
-        getDenunciasAndDisplay();
       }
     );
   } else {
@@ -31,9 +39,14 @@ function getLocation() {
     const defaultLatitude = -23.543;
     const defaultLongitude = -46.736;
     initMap(defaultLatitude, defaultLongitude);
-    getDenunciasAndDisplay();
   }
 }
+
+// Chamar a função getLocation() assim que o DOM estiver pronto
+document.addEventListener("DOMContentLoaded", function () {
+  getLocation();
+});
+
 function getDenuncias(callback) {
   $.ajax({
     url: "../pages/get_denuncias.php",
