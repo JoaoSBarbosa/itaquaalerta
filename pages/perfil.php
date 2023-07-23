@@ -159,7 +159,9 @@ $dadosUsuario = getUsuarioData();
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalDenuncia<?php echo $denuncia['id']; ?>Label"><?php echo $denuncia['titulo']; ?></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="boder:none">
+            <span aria-hidden="true"><i class="fas fa-circle-xmark fa-2x" tyle="font-size:2rem"></i></span>
+          </button>
         </div>
         <div class="modal-body">
           <form>

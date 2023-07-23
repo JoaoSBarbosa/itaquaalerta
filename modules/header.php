@@ -36,7 +36,11 @@
 <!-- Menu do header para dispositivos móveis -->
 <nav class="mobile-menu d-md-none">
   <ul class="d-flex flex-column w-100 align-items-center">
-    <li>Bem-vindo, Usuário</li>
-    <li>Menu Sair</li>
+    <li class="nav-link text-center text-white">Bem-vindo(a),
+      <?php echo $_SESSION["usuarioNome"]; ?>
+    </li>
+    <li class="nav-item">
+      <a class="btn btn-danger" href="logout.php">Sair</a>
+    </li>
   </ul>
 </nav>

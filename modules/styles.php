@@ -136,6 +136,19 @@
     bottom: 5px;
   }
 
+  .modal-header .btn-close {
+    font-size: 1rem;
+  }
+
+  .grafico-container canvas {
+    max-width: 100%;
+  }
+
+  .grafico-container h2 {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
   @media (max-width: 992px) {
     .denuncia_item {
       flex-basis: 100%;

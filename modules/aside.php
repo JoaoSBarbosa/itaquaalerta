@@ -17,5 +17,9 @@
       <i class="fas fa-exclamation-circle"></i>
       Fazer Denuncia
     </a>
+    <a href="../pages/home.php#grafico" class="list-group-item list-group-item-action">
+      <i class="fas fa-tachometer-alt"></i>
+      Dashboard
+    </a>
   </ul>
 </aside>

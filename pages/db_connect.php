@@ -171,5 +171,48 @@ function getFotoPerfil()
     return 'caminho_para_foto_padrao.jpg'; // Caminho para a foto padrão caso não haja foto do perfil
   }
 }
+// Função para obter as categorias com mais ocorrências
+function getCategoriasMaisOcorrencias()
+{
+  global $conn;
+  $sql = "SELECT categoria, COUNT(*) as total FROM denuncias GROUP BY categoria ORDER BY total DESC LIMIT 5";
+  $resultado = $conn->query($sql);
 
+  $dados = array();
+  while ($row = $resultado->fetch_assoc()) {
+    $dados[$row['categoria']] = $row['total'];
+  }
+
+  return $dados;
+}
+
+// Função para obter os bairros com mais ocorrências
+function getBairrosMaisOcorrencias()
+{
+  global $conn;
+  $sql = "SELECT bairro_da_ocorrencia, COUNT(*) as total FROM denuncias GROUP BY bairro_da_ocorrencia ORDER BY total DESC LIMIT 5";
+  $resultado = $conn->query($sql);
+
+  $dados = array();
+  while ($row = $resultado->fetch_assoc()) {
+    $dados[$row['bairro_da_ocorrencia']] = $row['total'];
+  }
+
+  return $dados;
+}
+
+// Função para obter as ruas com mais ocorrências
+function getRuasMaisOcorrencias()
+{
+  global $conn;
+  $sql = "SELECT rua_da_ocorrencia, COUNT(*) as total FROM denuncias GROUP BY rua_da_ocorrencia ORDER BY total DESC LIMIT 5";
+  $resultado = $conn->query($sql);
+
+  $dados = array();
+  while ($row = $resultado->fetch_assoc()) {
+    $dados[$row['rua_da_ocorrencia']] = $row['total'];
+  }
+
+  return $dados;
+}
 ?>
