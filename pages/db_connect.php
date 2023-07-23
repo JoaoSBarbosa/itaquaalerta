@@ -113,7 +113,7 @@ function getDenunciasById()
   $usuario_id = $_SESSION["usuarioId"];
 
   if ($conn) {
-    $sql = "SELECT titulo, descricao, foto, categoria FROM denuncias WHERE usuario_id = '$usuario_id' ORDER BY id DESC";
+    $sql = "SELECT id, titulo, descricao, categoria, bairro_da_ocorrencia, rua_da_ocorrencia, numero_aproximado, data_da_ocorrencia, foto FROM denuncias WHERE usuario_id = '$usuario_id' ORDER BY id DESC";
     $resultado = $conn->query($sql);
     if ($resultado && $resultado->num_rows > 0) {
       return $resultado->fetch_all(MYSQLI_ASSOC);

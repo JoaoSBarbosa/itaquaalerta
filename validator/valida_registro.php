@@ -7,9 +7,11 @@ $email = $_POST['email'];
 $dt_nascimento = $_POST['dt_nascimento'];
 $celular = $_POST['celular'];
 $senha = $_POST['senha'];
+$confirmar_senha = $_POST['confirmar_senha'];
+$sexo = $_POST['sexo'];
 
 // Verificar se os campos foram preenchidos
-if (!empty($nome) && !empty($email) && !empty($dt_nascimento) && !empty($celular) && !empty($senha)) {
+if (!empty($nome) && !empty($email) && !empty($dt_nascimento) && !empty($celular) && !empty($senha) && !empty($confirmar_senha) && !empty($sexo)) {
   // Validar o formato do email
   if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
     // Verificar se o e-mail já está cadastrado no banco de dados
@@ -18,12 +20,15 @@ if (!empty($nome) && !empty($email) && !empty($dt_nascimento) && !empty($celular
 
     if ($result_check_email->num_rows > 0) {
       // E-mail já cadastrado, redirecionar para a página de recuperação de senha
-      // header('Location: ../pages/recuperar_senha.php');
       header('Location: ../pages/registro.php?registro=usuariocadastrado');
       exit;
     } else {
-      // E-mail não cadastrado, inserir os dados no banco de dados
-      $sql = "INSERT INTO usuarios (nome, email, data_nascimento, celular, senha) VALUES ('$nome', '$email', '$dt_nascimento', '$celular', '$senha')";
+      if ($senha !== $confirmar_senha) {
+        header('Location: ../pages/registro.php?registro=errosenha');
+        exit;
+      }
+
+      $sql = "INSERT INTO usuarios (nome, email, data_nascimento, celular, senha, sexo) VALUES ('$nome', '$email', '$dt_nascimento', '$celular', '$senha', '$sexo')";
       if ($conn->query($sql) === TRUE) {
         // Obter o ID e nome do usuário recém-cadastrado
         $usuario_id = $conn->insert_id;
@@ -51,4 +56,5 @@ if (!empty($nome) && !empty($email) && !empty($dt_nascimento) && !empty($celular
 }
 
 $conn->close();
+
 ?>

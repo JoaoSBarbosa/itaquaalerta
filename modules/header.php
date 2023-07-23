@@ -5,13 +5,26 @@
   <div class="hamburger" onclick="toggleSidebar()">&#9776;</div>
   <nav class="d-none d-md-flex">
     <ul class="d-flex flex-row align-items-center justify-content-between">
-      <!-- Exibir a foto de perfil -->
-      <?php $fotoPerfil = getFotoPerfil(); ?>
+
+      <!-- Exibir a foto de perfil ou imagem padrão -->
       <li class="nav-item">
-        <img src="<?php echo $fotoPerfil; ?>" alt="Foto de Perfil" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+        <?php
+        require_once 'db_connect.php';
+        $dadosUsuario = getUsuarioData();
+        if (!empty($dadosUsuario['foto_path'])) {
+          $foto_path = '../upload/' . $dadosUsuario['foto_path'];
+        } else {
+          $foto_path = '../upload/user.jpg'; // Caminho da imagem padrão
+        }
+        ?>
+        <img src="<?php echo $foto_path; ?>" alt="Foto de Perfil" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
       </li>
-      <li class="nav-link text-center">Bem-vindo(a),
+
+      <li class="nav-link text-center text-white">Bem-vindo(a),
         <?php echo $_SESSION["usuarioNome"]; ?>
+      </li>
+      <li class="nav-item">
+        <a href=""></a>
       </li>
       <li class="nav-item">
         <a class="btn btn-danger" href="logout.php">Sair</a>

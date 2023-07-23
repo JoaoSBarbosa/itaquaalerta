@@ -12,11 +12,7 @@ body {
   height: 100vh;
   width: 100%;
 }
-#logo {
-  display: flex;
-  align-items: center;
-  border: 2px solid red;
-}
+
 .container-grid {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -130,7 +126,6 @@ h1 {
   display: grid;
   grid-template-columns: 200px 1fr;
   /* height: calc(100vh - 90px); */
-  border: 2px solid red;
   grid-template-columns: 200px 1fr;
 }
 @media (max-width: 700px) {
@@ -138,13 +133,7 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
-#teste {
-  border: 2px solid green;
-}
-#teste-section_ultimas_denuncias {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
+
 #section-info {
   width: 100%;
   padding: 0;
@@ -155,8 +144,7 @@ h1 {
   width: 100%;
 }
 
-.sidebar {
-  /* height: 100vh; */
+/* .sidebar {
   padding: 10px 5px;
   width: 100%;
   text-align: left;
@@ -172,7 +160,7 @@ h1 {
 
 .nav-link {
   color: #000;
-}
+} */
 
 .news {
   margin-top: 20px;

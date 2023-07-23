@@ -2,9 +2,6 @@
 session_start();
 
 if (isset($_SESSION["autenticado"]) && $_SESSION["autenticado"] == 'SIM') {
-  // Usuário já está logado, faça o logout
-  // session_destroy();
-  // header("Location: ../index.php");
   header("Location: ./pages/home.php");
   exit;
 }

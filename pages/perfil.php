@@ -107,20 +107,30 @@ $dadosUsuario = getUsuarioData();
                 $descricao = $denuncia['descricao'];
                 $imagem = $denuncia['foto'];
                 $categoria = $denuncia['categoria'];
+                $bairro = $denuncia['bairro_da_ocorrencia'];
+                $rua = $denuncia['rua_da_ocorrencia'];
+                $numero = $denuncia['numero_aproximado'];
+                $data = $denuncia['data_da_ocorrencia'];
                 ?>
                 <div class="col mb-4">
                   <div class="card h-100">
-                    <img src="../upload/<?php echo $imagem; ?>" class="card-img-top" alt="<?php echo $titulo; ?>">
-                    <div class="card-body">
+                    <figure class="img">
+                      <img src="../upload/<?php echo $imagem; ?>" class="card-img-top" alt="<?php echo $titulo; ?>">
                       <span class="categoria bg-primary text-white rounded px-2 py-1" style="font-size: 12px;">
                         <?php echo $categoria; ?>
                       </span>
+                    </figure>
+                    <div class="card-body">
+
                       <h5 class="card-title">
                         <?php echo $titulo; ?>
                       </h5>
                       <p class="card-text">
                         <?php echo $descricao; ?>
                       </p>
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDenuncia<?php echo $denuncia['id']; ?>">
+                        Detalhes
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -139,3 +149,53 @@ $dadosUsuario = getUsuarioData();
 </body>
 
 </html>
+
+<!-- Loop das denúncias -->
+<?php foreach ($denuncias as $denuncia) {
+  // ...
+  ?>
+  <div class="modal fade" id="modalDenuncia<?php echo $denuncia['id']; ?>" tabindex="-1" aria-labelledby="modalDenuncia<?php echo $denuncia['id']; ?>Label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalDenuncia<?php echo $denuncia['id']; ?>Label"><?php echo $denuncia['titulo']; ?></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <img src="../upload/<?php echo $denuncia['foto']; ?>" class="card-img-top" alt="<?php echo $denuncia['titulo']; ?>" style="max-width: 200px;">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Descrição:</label>
+              <textarea class="form-control" rows="4" readonly><?php echo $denuncia['descricao']; ?></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Categoria:</label>
+              <input type="text" class="form-control" value="<?php echo $denuncia['categoria']; ?>" readonly>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Bairro da Ocorrência:</label>
+              <input type="text" class="form-control" value="<?php echo $denuncia['bairro_da_ocorrencia']; ?>" readonly>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Rua da Ocorrência:</label>
+              <input type="text" class="form-control" value="<?php echo $denuncia['rua_da_ocorrencia']; ?>" readonly>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Número Aproximado:</label>
+              <input type="text" class="form-control" value="<?php echo $denuncia['numero_aproximado']; ?>" readonly>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Data da Ocorrência:</label>
+              <input type="text" class="form-control" value="<?php echo $denuncia['data_da_ocorrencia']; ?>" readonly>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php } ?>
