@@ -108,6 +108,7 @@ require_once '../modules/all_head.php';
       </section>
     </div>
   </div>
+  <script src="../public/js/aside.js"></script>
 
 </body>
 

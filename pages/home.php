@@ -139,6 +139,8 @@ $dadosRuas = getRuasMaisOcorrencias();
       criarDonutChart('grafico-bairros', totalOcorrenciasBairros, bairros);
       criarDonutChart('grafico-ruas', totalOcorrenciasRuas, ruas);
     });
+
+
   </script>
 
 

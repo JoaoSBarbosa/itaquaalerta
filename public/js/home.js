@@ -28,15 +28,15 @@ function getLocation() {
       },
       function (error) {
         console.error("Erro ao obter a localização do usuário:", error);
-        const defaultLatitude = -23.543;
-        const defaultLongitude = -46.736;
+        const defaultLatitude = -23.45997656324935;
+        const defaultLongitude = -46.36867237013799;
         initMap(defaultLatitude, defaultLongitude);
       }
     );
   } else {
     console.error("Geolocalização não é suportada neste navegador.");
-    const defaultLatitude = -23.543;
-    const defaultLongitude = -46.736;
+    const defaultLatitude = -23.45997656324935;
+    const defaultLongitude = -46.36867237013799;
     initMap(defaultLatitude, defaultLongitude);
   }
 }

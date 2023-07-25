@@ -57,8 +57,6 @@ require_once '../modules/all_head.php';
                     <option value="outros">Outros</option>
                   </select>
                 </div>
-
-                <!-- Campos adicionais -->
                 <div class="mb-3">
                   <label for="bairro_da_ocorrencia" class="form-label">Bairro da Ocorrência</label>
                   <input type="text" class="form-control" id="bairro_da_ocorrencia" name="bairro_da_ocorrencia" required>
@@ -90,16 +88,8 @@ require_once '../modules/all_head.php';
   </div>
 
 
-  <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  -->
+  <script src="../public/js/aside.js"></script>
+
 </body>
 
 </html>

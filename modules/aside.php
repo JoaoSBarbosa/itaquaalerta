@@ -21,5 +21,9 @@
       <i class="fas fa-tachometer-alt"></i>
       Dashboard
     </a>
+    <a href="../pages/sobre.php" class="list-group-item list-group-item-action">
+      <i class="fas fa-info-circle"></i>
+      Sobre
+    </a>
   </ul>
 </aside>

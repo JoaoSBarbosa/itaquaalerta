@@ -11,6 +11,8 @@ session_start();
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
   <link rel="stylesheet" href="../public/css/styles.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+
 
 </head>
 
@@ -43,7 +45,8 @@ session_start();
         <div class="d-flex justify-content-center">
           <img src="../public/img/inscreva-se.svg" class="img-fluid" style="max-width: 40%;" />
         </div>
-        <h2 class="text-center mt-3">Crie sua conta</h2>
+        <h2 class="text-center mt-3">Crie sua conta ( <span class="badge bg-warning mr-2">Apenas maiores de 16 anos</span>)</h2>
+
 
         <form action="../validator/valida_registro.php" method="post">
           <div class="form-group col-md-12">
@@ -63,6 +66,17 @@ session_start();
           <div class="form-group col-md-12">
             <input name="email" type="text" class="form-control" placeholder="E-mail">
           </div>
+          <?php
+          if (isset($_GET['registro']) && $_GET['registro'] === 'idadeinferior') {
+            ?>
+            <span class="text-danger">É preciso ser maior de 16 anos para se registrar.</span>
+          <?php } ?>
+          <?php
+          if (isset($_GET['registro']) && $_GET['registro'] === 'idadeinvalida') {
+            ?>
+            <span class="text-danger">Idade fora do padrão máximo!</span>
+          <?php } ?>
+
           <div class="form-group col-md-12">
             <input type="date" name="dt_nascimento" class="form-control" placeholder="Data de Nascimento">
           </div>
