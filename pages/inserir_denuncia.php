@@ -3,18 +3,25 @@ require_once 'db_connect.php';
 require_once '../validator/validador_acesso.php';
 require_once '../modules/all_head.php';
 
+echo $_SESSION['usuario_nome'];
 ?>
 
 
 <body>
   <?php
-  require_once '../modules/header.php'
-    ?>
+  require_once '../modules/header.php';
+  // echo $_SESSION['usuarioNome'];
+  echo $_SESSION['usuario_nome'];
+
+  ?>
 
   <div class="main">
     <?php
-    require_once '../modules/aside.php'
-      ?>
+    require_once '../modules/aside.php';
+    // echo $_SESSION['usuarioNome'];
+    // echo $_SESSION['usuarioEmail'];
+
+    ?>
 
     <div class="content" style="padding: 0;">
       <section class="overview">
@@ -29,14 +36,16 @@ require_once '../modules/all_head.php';
               <h3 class="mb-4">Formulário de Denúncia</h3>
               <form action="../validator/valida_denuncia.php" method="post" enctype="multipart/form-data" class="custom-form">
                 <input type="hidden" name="usuario_id" value="<?php echo $_SESSION["usuarioId"]; ?>">
+                <input type="hidden" name="usuario_nome" value="<?php echo $_SESSION['usuarioNome']; ?>">
+                <input type="hidden" name="usuario_email" value="<?php echo $_SESSION['usuarioEmail']; ?>">
                 <div class="mb-3">
                   <label for="titulo" class="form-label">Título</label>
-                  <input type="text" class="form-control" id="titulo" name="titulo" required>
+                  <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Informe o título da denúncia" required>
                 </div>
 
                 <div class="mb-3">
                   <label for="descricao" class="form-label">Descrição</label>
-                  <textarea class="form-control" id="descricao" name="descricao" rows="4" required></textarea>
+                  <textarea class="form-control" id="descricao" name="descricao" rows="4" placeholder="Informe a descrição da denúncia" required></textarea>
                 </div>
 
                 <div class="mb-3">
@@ -58,22 +67,22 @@ require_once '../modules/all_head.php';
                   </select>
                 </div>
                 <div class="mb-3">
-                  <label for="bairro_da_ocorrencia" class="form-label">Bairro da Ocorrência</label>
-                  <input type="text" class="form-control" id="bairro_da_ocorrencia" name="bairro_da_ocorrencia" required>
+                  <label for="bairro_da_ocorrencia" class="form-label">Bairro da ocorrência</label>
+                  <input type="text" class="form-control" id="bairro_da_ocorrencia" name="bairro_da_ocorrencia" placeholder="Informe o bairro da ocorrência" required>
                 </div>
 
                 <div class="mb-3">
-                  <label for="rua_da_ocorrencia" class="form-label">Rua da Ocorrência</label>
-                  <input type="text" class="form-control" id="rua_da_ocorrencia" name="rua_da_ocorrencia" required>
+                  <label for="rua_da_ocorrencia" class="form-label">Rua da ocorrência</label>
+                  <input type="text" class="form-control" id="rua_da_ocorrencia" name="rua_da_ocorrencia" placeholder="Informe a rua da ocorrência" required>
                 </div>
 
                 <div class="mb-3">
-                  <label for="numero_aproximado" class="form-label">Número Aproximado</label>
-                  <input type="number" class="form-control" id="numero_aproximado" name="numero_aproximado" required>
+                  <label for="numero_aproximado" class="form-label">Número aproximado</label>
+                  <input type="number" class="form-control" id="numero_aproximado" name="numero_aproximado" placeholder="Informe o número aproximado" required>
                 </div>
 
                 <div class="mb-3">
-                  <label for="data_da_ocorrencia" class="form-label">Data da Ocorrência</label>
+                  <label for="data_da_ocorrencia" class="form-label">Data da ocorrência</label>
                   <input type="date" class="form-control" id="data_da_ocorrencia" name="data_da_ocorrencia" required>
                 </div>
 

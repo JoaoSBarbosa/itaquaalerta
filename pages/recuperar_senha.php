@@ -53,7 +53,7 @@ require_once 'db_connect.php';
     <div class="card m-2">
       <h4 class="card-title">Perdeu sua senha?</h4>
       <p class="card-text">Insira seu endereço de e-mail cadastrado e enviaremos um link para você resetar sua senha.</p>
-      <form action="enviar_link.php" method="post">
+      <form action="enviar_email.php" method="post">
         <div class="form-group">
           <label for="email">E-mail</label>
           <input type="email" class="form-control" id="email" name="email" required>

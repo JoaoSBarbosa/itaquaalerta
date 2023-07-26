@@ -227,4 +227,50 @@
       display: flex;
     }
   }
+
+  /* SOBRE */
+  @media(max-width:900px) {
+
+    .sobre,
+    .quem-sou {
+      grid-template-columns: 1fr;
+    }
+
+    .sobre-info-titulo {
+      font-size: 2rem;
+    }
+
+    .sobre-info-content {
+      max-width: 100%;
+    }
+
+    .mais-detalhes-content {
+      grid-template-columns: 1fr;
+      gap: 10px;
+
+      padding: 0;
+    }
+
+  }
+
+  @media(max-width:450px) {
+    .quem-sou-img img {
+      max-width: 100%;
+    }
+  }
+
+  @media(max-width:300px) {
+    .mais-detalhes-content {
+      display: none;
+    }
+
+    .hidden {
+      display: block;
+    }
+
+    .sobre,
+    .quem-sou {
+      padding: 5px;
+    }
+  }
 </style>

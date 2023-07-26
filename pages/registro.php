@@ -45,7 +45,7 @@ session_start();
         <div class="d-flex justify-content-center">
           <img src="../public/img/inscreva-se.svg" class="img-fluid" style="max-width: 40%;" />
         </div>
-        <h2 class="text-center mt-3">Crie sua conta ( <span class="badge bg-warning mr-2">Apenas maiores de 16 anos</span>)</h2>
+        <h2 class="text-center mt-3">Crie sua conta - <span class="badge bg-warning mr-2">Apenas maiores de 16 anos</span></h2>
 
 
         <form action="../validator/valida_registro.php" method="post">

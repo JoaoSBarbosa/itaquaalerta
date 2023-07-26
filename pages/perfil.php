@@ -3,25 +3,10 @@ require_once 'db_connect.php';
 require_once '../validator/validador_acesso.php';
 require_once '../modules/all_head.php';
 
-// Tratar o upload da imagem
-if (isset($_FILES['foto_perfil']) && !empty($_FILES['foto_perfil']['name'])) {
-  $foto_perfil = $_FILES['foto_perfil'];
-  $upload_dir = '../upload/';
-  $foto_path = $upload_dir . basename($foto_perfil['name']);
-
-  if (move_uploaded_file($foto_perfil['tmp_name'], $foto_path)) {
-    // Atualizar o caminho da foto na tabela de usuários
-    $userId = $_SESSION["usuarioId"];
-    $sql = "UPDATE usuarios SET foto_path = ? WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("si", $foto_path, $userId);
-    $stmt->execute();
-    $stmt->close();
-  }
-}
-
-// Obtém os dados do usuário
 $dadosUsuario = getUsuarioData();
+
+
+
 
 ?>
 
@@ -61,8 +46,18 @@ $dadosUsuario = getUsuarioData();
                         }
                         echo '</div>';
 
+                        // Verifica se há mensagem de sucesso na URL
+                        if (isset($_GET["sucesso"]) && $_GET["sucesso"] == 1) {
+                          echo '<div class="alert alert-success" role="alert">Dados atualizados com sucesso!</div>';
+                        }
+
+                        // Verifica se há mensagem de erro de banco de dados na URL
+                        if (isset($_GET["erro_bd"]) && $_GET["erro_bd"] == 1) {
+                          echo '<div class="alert alert-danger" role="alert">Erro ao atualizar os dados. Por favor, tente novamente.</div>';
+                        }
+
                         // Formulário para editar os dados textuais
-                        echo '<form method="post" enctype="multipart/form-data">
+                        echo '<form action="../validator/valida_atualizacao.php" method="post" enctype="multipart/form-data">
                                 <div class="mb-3">
                                   <label for="foto_perfil" class="form-label">Escolha uma nova foto de perfil:</label>
                                   <input type="file" class="form-control" id="foto_perfil" name="foto_perfil" accept="image/*">
@@ -81,6 +76,7 @@ $dadosUsuario = getUsuarioData();
                                 </div>
                                 <button type="submit" class="btn btn-primary my-4">Salvar Alterações</button>
                               </form>';
+
                       } else {
                         echo '<p>Dados não encontrados.</p>';
                       }

@@ -1,8 +1,9 @@
 <?php
 require_once 'db_connect.php';
 require_once '../validator/validador_acesso.php';
-require_once '../modules/all_head.php'
-  ?>
+require_once '../modules/all_head.php';
+
+?>
 </head>
 
 <body>
@@ -17,7 +18,7 @@ require_once '../modules/all_head.php'
       <section class="overview">
         <div class="container_denuncias">
           <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 d-flex align-items-center justify-content-center" style="height: 100%;">
-            <div class="" style="width: max-content;">
+            <div class="">
               <h1>Denúncia enviada com sucesso!</h1>
               <p>Obrigado por contribuir para uma cidade melhor.</p>
               <p>A sua denúncia será analisada pela equipe de fiscalização e, se for confirmada, as medidas cabíveis serão tomadas.</p>
